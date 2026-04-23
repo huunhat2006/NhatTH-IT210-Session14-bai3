@@ -40,3 +40,22 @@ public class OrderService {
         }
     }
 }
+
+// Phần 1 – Phân tích & thiết kế
+// 1. Input / Output
+// Input:
+// productId
+// quantity (thường = 1)
+// Output:
+// Thành công → tạo Order + trừ stock
+// Thất bại → “Hết hàng” hoặc “Hệ thống bận”
+
+// 2. Giải pháp đề xuất
+//Optimistic Lock (khuyên dùng)
+// Thêm @Version vào Product
+// Khi 2 thread cùng update:
+// 1 thread thành công
+// thread còn lại → OptimisticLockException
+// Ưu điểm:
+// Không lock DB lâu
+// Scale tốt cho flash sale
